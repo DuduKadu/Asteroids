@@ -22,13 +22,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-
+        player.update(dt)
         fill_screen = pygame.Surface.fill(screen, black)
         player.draw(screen)
         pygame.display.flip()
         fps = clock.tick(60)
         dt = 1000.0 / fps
-        player.update(dt)
+        
 
 if __name__ == "__main__":
     main()
