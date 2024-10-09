@@ -7,6 +7,10 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable,drawable)
+
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
     player = Player(x,y,PLAYER_RADIUS)
@@ -22,9 +26,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        player.update(dt)
+        
+        for sprite in updatable:
+            sprite.update(dt)
+
         fill_screen = pygame.Surface.fill(screen, black)
-        player.draw(screen)
+        
+        for sprite in drawable:
+            sprite.draw(screen)
+
         pygame.display.flip()
         fps = clock.tick(60)
         dt = 1000.0 / fps
